@@ -17,13 +17,13 @@ public class CursorAffordance : MonoBehaviour
     void Start()
     {
         cameraRaycaster = GetComponent<CameraRaycaster>();
+        cameraRaycaster.onLayerChange += OnLayerChanged;//registerng 
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+   
+    void OnLayerChanged(Layer newLayer)
     {
-        //We do it in lateupdate so we dont get a not valid layer error
-        switch (cameraRaycaster.LayerHit)
+        switch (newLayer)
         {
             case Layer.Walkable:
                 Cursor.SetCursor(walkCursor, cursorHotspot, CursorMode.Auto);
